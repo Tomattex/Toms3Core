@@ -35,7 +35,7 @@ import java.util.concurrent.ConcurrentHashMap
 
 class Toms3Core : JavaPlugin() {
     // -- IMPORTANT --
-    val configVersion = 7
+    val configVersion = 8
     // -- IMPORTANT --
 
     val minimessage = MiniMessage.miniMessage()

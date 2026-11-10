@@ -154,4 +154,4 @@ misc:
         es: "<gold>El servidor está teniendo problemas, así que puede que haya bajo rendimiento."
 
 # Do not touch.
-config-version: 7
+config-version: 8
