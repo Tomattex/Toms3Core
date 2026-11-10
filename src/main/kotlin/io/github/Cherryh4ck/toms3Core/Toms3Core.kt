@@ -99,15 +99,15 @@ class Toms3Core : JavaPlugin() {
     val haveAnnouncementsDisabled: MutableSet<UUID> = ConcurrentHashMap.newKeySet()
 
     override fun onEnable() {
-        logger.info("---------------------")
+        logToConsole("<grey>----------------------------------")
         saveDefaultConfig()
 
         val pluginId = 35095
         val metrics = Metrics(this, pluginId)
-        logger.info("bStats initialized.")
+        logToConsole("<green>bStats initialized.")
 
         if (!playerDataPath.exists()) {
-            logger.info("Playerdata folder created.")
+            logToConsole("<green>Playerdata folder created.")
             playerDataPath.mkdirs()
         }
 
@@ -129,8 +129,8 @@ class Toms3Core : JavaPlugin() {
 
         reloadPlugin()
 
-        logger.info("Core activated.")
-        logger.info("---------------------")
+        logToConsole("<green>Core activated.")
+        logToConsole("<grey>----------------------------------")
     }
 
     override fun onDisable() {
