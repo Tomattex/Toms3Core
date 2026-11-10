@@ -27,12 +27,8 @@ class Playtime(private val plugin: Toms3Core) : TabExecutor {
 
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
         val targetUser : String
-        val userLocale : String
-        val isSpanish : Boolean
 
         if (sender is Player){
-            userLocale = sender.locale().toString()
-            isSpanish = userLocale.startsWith("es")
             targetUser = if (args.isEmpty()) {
                 sender.name
             } else{
@@ -40,7 +36,6 @@ class Playtime(private val plugin: Toms3Core) : TabExecutor {
             }
         }
         else{
-            isSpanish = true
             if (args.isEmpty()){
                 plugin.logToConsole("<red>You need to specify a player to use this command.")
                 return true
@@ -51,13 +46,7 @@ class Playtime(private val plugin: Toms3Core) : TabExecutor {
         }
 
         if (!validateUsername(targetUser)) {
-            val mensaje = if (isSpanish && plugin.spanish_enabled) {
-                minimessage.deserialize("${plugin.prefix} <red>$targetUser no es un nombre de jugador válido.</red>")
-            }
-            else {
-                minimessage.deserialize("${plugin.prefix} <red>$targetUser is not a valid player name.</red>")
-            }
-            sender.sendMessage(mensaje)
+            sender.sendMessage(minimessage.deserialize("${plugin.prefix} <red>$targetUser is not a valid player name.</red>"))
             return true
         }
 
@@ -81,13 +70,7 @@ class Playtime(private val plugin: Toms3Core) : TabExecutor {
                 }
             }
             if (!offlineplayer.isOnline && offlineplayer.firstPlayed == 0L){
-                val mensaje = if (isSpanish && plugin.spanish_enabled) {
-                    minimessage.deserialize("${plugin.prefix} <red>$targetUser nunca entró al servidor o no está en el cache del servidor.</red>")
-                }
-                else {
-                    minimessage.deserialize("${plugin.prefix} <red>$targetUser has never entered the server or is not in the server cache.</red>")
-                }
-                sender.sendMessage(mensaje)
+                sender.sendMessage(minimessage.deserialize("${plugin.prefix} <red>$targetUser has never entered the server or is not in the server cache.</red>"))
                 return@Runnable
             }
 
@@ -96,21 +79,11 @@ class Playtime(private val plugin: Toms3Core) : TabExecutor {
             val result = ms.milliseconds
             val resultHs = "%.2f".format(result.toDouble(DurationUnit.HOURS))
 
-            val mensaje = if (isSpanish && plugin.spanish_enabled) {
-                if (offlineplayer.name != sender.name){
-                    minimessage.deserialize("<gold>${plugin.prefix} <bold>${offlineplayer.name}</bold> tiene un tiempo de juego de <bold>$result</bold> (<bold>${resultHs}hs</bold>).</gold>")
-                }
-                else{
-                    minimessage.deserialize("<gold>${plugin.prefix} Tienes un tiempo de juego de <bold>$result</bold> (<bold>${resultHs}hs</bold>).</gold>")
-                }
+            val mensaje = if (offlineplayer.name != sender.name){
+                minimessage.deserialize("<gold>${plugin.prefix} <bold>${offlineplayer.name}</bold> has a playtime of <bold>$result</bold> (<bold>${resultHs}hs</bold>).</gold>")
             }
-            else {
-                if (offlineplayer.name != sender.name){
-                    minimessage.deserialize("<gold>${plugin.prefix} <bold>${offlineplayer.name}</bold> has a playtime of <bold>$result</bold> (<bold>${resultHs}hs</bold>).</gold>")
-                }
-                else{
-                    minimessage.deserialize("<gold>${plugin.prefix} You have a playtime of <bold>$result</bold> (<bold>${resultHs}hs</bold>).</gold>")
-                }
+            else{
+                minimessage.deserialize("<gold>${plugin.prefix} You have a playtime of <bold>$result</bold> (<bold>${resultHs}hs</bold>).</gold>")
             }
             sender.sendMessage(mensaje)
         })

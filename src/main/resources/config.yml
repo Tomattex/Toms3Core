@@ -5,10 +5,6 @@ general:
   # Discord Webhook for /dupe "Hall of Shame"
   # Set it empty to disable this function
   discord-webhook: ""
-  # Spanish translations
-  # THIS IS ONLY FOR toms3.cc, MOST MESSAGES CANNOT BE CUSTOMIZED!!!
-  # This will be removed soon and replaced with locale-based messages (Hopefully).
-  enable-spanish-translation: false
   # Enable cache system logging (logs playerdata creation & last seen updates)
   # Can be annoying if you have a lot of players, so be careful
   # By default, this is set to true
@@ -30,23 +26,15 @@ commands:
   # Has no actual use more than displaying a message.
   vote:
     enable: true
-    message:
-      en: "You can vote the server via: <b>url</b>"
-      es: "Puedes votar por el servidor entrando a: <b>url</b>"
+    message: "You can vote the server via: <b>url</b>"
   info:
     enable: true
-    message:
-      en: "Info about the server"
-      es: "Información sobre el servidor"
+    message: "Info about the server"
   toggleannouncements:
     enable: true
     message:
-      "on":
-        en: "Announcements are now <b>ON</b>."
-        es: "Los anuncios ahora están <b>activados</b>."
-      "off":
-        en: "Announcements are now <b>OFF</b>."
-        es: "Los anuncios ahora están <b>desactivados</b>."
+      "on": "Announcements are now <b>ON</b>."
+      "off": "Announcements are now <b>OFF</b>."
 
 # Utilities that may be useful or not
 utilities:
@@ -117,22 +105,14 @@ misc:
     enable: true
     # Join motd, inspired by lsd2.org
     join-motd:
-      first-join:
-        en: "Welcome to the server!"
-        es: "¡Bienvenido al servidor!"
-      general:
-        en: "Welcome back to the server!"
-        es: "¡Bienvenido devuelta al servidor!"
+      first-join: "Welcome to the server!"
+      general: "Welcome back to the server!"
     # Join title
-    join-title-message:
-      # You can disable this by setting everything to ""
-      # This also applies to the action bar
-      en: "Welcome"
-      es: "Bienvenido"
+    # You can disable this by setting to ""
+    # This also applies to the action bar
+    join-title-message: "Welcome"
     # Join action bar
-    join-action-bar-message:
-      en: "Welcome"
-      es: "Bienvenido"
+    join-action-bar-message: "Welcome"
   # Simple announcements system, create as many as you want
   # Selection is purely random and repeated announcements can appear again.
   announcements:
@@ -140,12 +120,8 @@ misc:
     # Time in seconds
     timer: 60
     messages:
-      example:
-        en: "<gold>Example."
-        es: "<gold>Ejemplo."
-      example-two:
-        en: "<gold>Example two."
-        es: "<gold>Ejemplo dos."
+      example: "<gold>Example."
+      example-two: "<gold>Example two."
   # Emergent announcements system
   # Useful for emergent announcements like "Server is restarting soon" // "We are currently suffering x problem"
   emergent-announcements:
@@ -154,9 +130,7 @@ misc:
     # Time in seconds (should be shorter than normal announcement's timer)
     timer: 15
     messages:
-      example:
-        en: "<gold>The server is currently suffering a problem, so expect low performance."
-        es: "<gold>El servidor está teniendo problemas, así que puede que haya bajo rendimiento."
+      example: "<gold>The server is currently suffering a problem, so expect low performance."
 
 # Do not touch.
 config-version: 8

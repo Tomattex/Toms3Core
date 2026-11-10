@@ -9,14 +9,7 @@ import org.bukkit.entity.Player
 class Vote(private val plugin : Toms3Core) : TabExecutor {
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
         if (sender is Player) {
-            val locale = sender.locale().toString()
-            val isSpanish = locale.startsWith("es")
-            val message = if (isSpanish && plugin.spanish_enabled) {
-                plugin.minimessage.deserialize("${plugin.prefix} ${plugin.vote_message_es}")
-            } else {
-                plugin.minimessage.deserialize("${plugin.prefix} ${plugin.vote_message_en}")
-            }
-            sender.sendMessage(message)
+            sender.sendMessage(plugin.minimessage.deserialize("${plugin.prefix} ${plugin.vote_message}"))
         }
         else{
             plugin.logToConsole("<red>You must be a player to use this command.")

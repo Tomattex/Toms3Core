@@ -7,7 +7,7 @@ import org.bukkit.command.TabExecutor
 
 class Info(private val plugin : Toms3Core) : TabExecutor {
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
-        sender.sendMessage(plugin.minimessage.deserialize("${plugin.info_message_en}"))
+        sender.sendMessage(plugin.minimessage.deserialize("${plugin.info_message}"))
         return true
     }
 

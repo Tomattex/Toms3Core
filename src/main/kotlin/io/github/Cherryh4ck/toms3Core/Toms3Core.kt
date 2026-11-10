@@ -46,7 +46,6 @@ class Toms3Core : JavaPlugin() {
     // ** general config ** //
     var prefix = config.getString("general.prefix")
     var discordWebhook = config.getString("general.discord-webhook")
-    var spanish_enabled = config.getBoolean("general.enable-spanish-translation")
     var cache_system_logging_enabled = config.getBoolean("general.enable-cache-system-logging")
 
     var chunklimits_enable = config.getBoolean("chunk-limits.enable")
@@ -56,16 +55,12 @@ class Toms3Core : JavaPlugin() {
 
     var dupe_webhook_message = config.getString("commands.dupe.discord-webhook-message")
 
-    var vote_message_en = config.getString("commands.vote.message.en")
-    var vote_message_es = config.getString("commands.vote.message.es")
+    var vote_message = config.getString("commands.vote.message")
 
-    var info_message_en = config.getString("commands.info.message.en")
-    var info_message_es = config.getString("commands.info.message.es")
+    var info_message = config.getString("commands.info.message")
 
-    var toggleannouncements_message_on_en = config.getString("commands.toggleannouncements.message.on.en")
-    var toggleannouncements_message_on_es = config.getString("commands.toggleannouncements.message.on.es")
-    var toggleannouncements_message_off_en = config.getString("commands.toggleannouncements.message.off.en")
-    var toggleannouncements_message_off_es = config.getString("commands.toggleannouncements.message.off.es")
+    var toggleannouncements_message_on = config.getString("commands.toggleannouncements.message.on")
+    var toggleannouncements_message_off = config.getString("commands.toggleannouncements.message.off")
 
     var op_blacklisted_commands = config.getStringList("utilities.op-command-blacklist.blacklisted-commands").map { it.lowercase() }
 
@@ -81,17 +76,13 @@ class Toms3Core : JavaPlugin() {
     var patch_vclip_exploit_mode = config.getString("patches.nether.patch-vclip-exploit.mode")?.uppercase()
     var patch_vclip_exploit = config.getBoolean("patches.nether.patch-vclip-exploit.enable")
 
-    var motd_general = config.getString("misc.join-events.join-motd.general.en")
-    var motd_es = config.getString("misc.join-events.join-motd.general.es")
+    var motd_general = config.getString("misc.join-events.join-motd.general")
 
-    var first_join_motd = config.getString("misc.join-events.join-motd.first-join.en")
-    var first_join_motd_es = config.getString("misc.join-events.join-motd.first-join.es")
+    var first_join_motd = config.getString("misc.join-events.join-motd.first-join")
 
-    var title_announcement_en = config.getString("misc.join-events.join-title-message.en")
-    var title_announcement_es = config.getString("misc.join-events.join-title-message.es")
+    var title_announcement = config.getString("misc.join-events.join-title-message")
 
-    var actionbar_announcement_en = config.getString("misc.join-events.join-action-bar-message.en")
-    var actionbar_announcement_es = config.getString("misc.join-events.join-action-bar-message.es")
+    var actionbar_announcement = config.getString("misc.join-events.join-action-bar-message")
 
     var announcements_enabled = config.getBoolean("misc.announcements.enable")
     var announcements_timer = config.getInt("misc.announcements.timer")
@@ -211,19 +202,14 @@ class Toms3Core : JavaPlugin() {
         // This is so fucked up.
         prefix = config.getString("general.prefix")
         discordWebhook = config.getString("general.discord-webhook")
-        spanish_enabled = config.getBoolean("general.enable-spanish-translation")
         cache_system_logging_enabled = config.getBoolean("general.enable-cache-system-logging")
         usernameValidationRegex = config.getString("commands.username-validation-regex") ?: "^[a-zA-Z0-9_]{3,16}\$"
         usernameValidationRegexEnabled = usernameValidationRegex.isEmpty()
         dupe_webhook_message = config.getString("commands.dupe.discord-webhook-message")
-        vote_message_en = config.getString("commands.vote.message.en")
-        vote_message_es = config.getString("commands.vote.message.es")
-        info_message_en = config.getString("commands.info.message.en")
-        info_message_es = config.getString("commands.info.message.es")
-        toggleannouncements_message_on_en = config.getString("commands.toggleannouncements.message.on.en")
-        toggleannouncements_message_on_es = config.getString("commands.toggleannouncements.message.on.es")
-        toggleannouncements_message_off_en = config.getString("commands.toggleannouncements.message.off.en")
-        toggleannouncements_message_off_es = config.getString("commands.toggleannouncements.message.off.es")
+        vote_message = config.getString("commands.vote.message")
+        info_message = config.getString("commands.info.message")
+        toggleannouncements_message_on = config.getString("commands.toggleannouncements.message.on")
+        toggleannouncements_message_off = config.getString("commands.toggleannouncements.message.off")
         op_blacklisted_commands = config.getStringList("utilities.op-command-blacklist.blacklisted-commands").map { it.lowercase() }
         chunklimits_enable = config.getBoolean("chunk-limits.enable")
         tile_entities_limit = config.getInt("chunk-limits.tile-entities.entity-limit")
@@ -235,14 +221,10 @@ class Toms3Core : JavaPlugin() {
         block_nether_roof = config.getBoolean("patches.nether.block-nether-roof.enable")
         patch_vclip_exploit_mode = config.getString("patches.nether.patch-vclip-exploit.mode")?.uppercase()
         patch_vclip_exploit = config.getBoolean("patches.nether.patch-vclip-exploit.enable")
-        motd_general = config.getString("misc.join-events.join-motd.general.en")
-        motd_es = config.getString("misc.join-events.join-motd.general.es")
-        first_join_motd = config.getString("misc.join-events.join-motd.first-join.en")
-        first_join_motd_es = config.getString("misc.join-events.join-motd.first-join.es")
-        title_announcement_en = config.getString("misc.join-events.join-title-message.en")
-        title_announcement_es = config.getString("misc.join-events.join-title-message.es")
-        actionbar_announcement_en = config.getString("misc.join-events.join-action-bar-message.en")
-        actionbar_announcement_es = config.getString("misc.join-events.join-action-bar-message.es")
+        motd_general = config.getString("misc.join-events.join-motd.general")
+        first_join_motd = config.getString("misc.join-events.join-motd.first-join")
+        title_announcement = config.getString("misc.join-events.join-title-message")
+        actionbar_announcement = config.getString("misc.join-events.join-action-bar-message")
         announcements_enabled = config.getBoolean("misc.announcements.enable")
         announcements_timer = config.getInt("misc.announcements.timer")
         announcements_interval = (20 * announcements_timer).toLong().coerceAtLeast(1)
@@ -283,19 +265,12 @@ class Toms3Core : JavaPlugin() {
                 if (list.isNotEmpty()) {
                     val random = list.random()
                     val path = "misc.announcements.messages.$random"
-                    val msgEn = config.getString("$path.en")?.let { input -> minimessage.deserialize(input) }
-                        ?: Component.empty()
-                    val msgEs = config.getString("$path.es")?.let { input -> minimessage.deserialize(input) }
+                    val msg = config.getString(path)?.let { input -> minimessage.deserialize(input) }
                         ?: Component.empty()
 
                     for (player in Bukkit.getOnlinePlayers()) {
                         if (!haveAnnouncementsDisabled.contains(player.uniqueId)) {
-                            val locale = player.locale().toString()
-                            if (locale.startsWith("es") && spanish_enabled) {
-                                player.sendMessage(msgEs)
-                            } else {
-                                player.sendMessage(msgEn)
-                            }
+                            player.sendMessage(msg)
                         }
                     }
                 }
@@ -317,18 +292,11 @@ class Toms3Core : JavaPlugin() {
                 if (list.isNotEmpty()) {
                     val random = list.random()
                     val path = "misc.emergent-announcements.messages.$random"
-                    val msgEn = config.getString("$path.en")?.let { input -> minimessage.deserialize(input) }
-                        ?: Component.empty()
-                    val msgEs = config.getString("$path.es")?.let { input -> minimessage.deserialize(input) }
+                    val msg = config.getString(path)?.let { input -> minimessage.deserialize(input) }
                         ?: Component.empty()
 
                     for (player in Bukkit.getOnlinePlayers()) {
-                        val locale = player.locale().toString()
-                        if (locale.startsWith("es") && spanish_enabled) {
-                            player.sendMessage(msgEs)
-                        } else {
-                            player.sendMessage(msgEn)
-                        }
+                        player.sendMessage(msg)
                     }
                 }
             }

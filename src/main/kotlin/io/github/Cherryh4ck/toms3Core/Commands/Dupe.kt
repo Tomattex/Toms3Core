@@ -22,19 +22,12 @@ class Dupe(private val plugin : Toms3Core) : TabExecutor {
 
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
         if (sender is Player) {
-            val locale = sender.locale().toString()
-            val isSpanish = locale.startsWith("es") // le isspanish
             val playerDataCache = plugin.playerDataFile(sender.name) ?: return true
             val config = YamlConfiguration.loadConfiguration(playerDataCache)
             val alreadyFallen = config.getBoolean("fallen-for-dupe")
 
             if (alreadyFallen) {
-                if (isSpanish && plugin.spanish_enabled) {
-                    sender.sendMessage(minimessage.deserialize("${plugin.prefix} <red>No seas idiota, newfag.</red>"))
-                }
-                else {
-                    sender.sendMessage(minimessage.deserialize("${plugin.prefix} <red>Don't be an idiot, newfag.</red>"))
-                }
+                sender.sendMessage(minimessage.deserialize("${plugin.prefix} <red>Don't be an idiot, newfag.</red>"))
                 return true
             }
 
@@ -45,9 +38,7 @@ class Dupe(private val plugin : Toms3Core) : TabExecutor {
                 })
             }
 
-            val joinMessage = if (isSpanish && plugin.spanish_enabled) { minimessage.deserialize("<gray>popbob se unió al servidor.</gray>") } else { minimessage.deserialize("<gray>popbob has joined the server.</gray>") }
-            val hallOfShameMessage = if (isSpanish && plugin.spanish_enabled) { minimessage.deserialize("<red>Ahora estás en la lista de jugadores lamentables.</red>") } else { minimessage.deserialize("<red>You have been added to the Hall of Shame.</red>") }
-            sender.sendMessage(joinMessage)
+            sender.sendMessage(minimessage.deserialize("<gray>popbob has joined the server.</gray>"))
             Bukkit.getScheduler().runTaskLater(plugin, Runnable {
                 sender.sendMessage("${sender.name} » popbob my coords are ${sender.x.toInt().toString()} ${sender.z.toInt().toString()} come get me please")
             }, 20L)
@@ -65,18 +56,12 @@ class Dupe(private val plugin : Toms3Core) : TabExecutor {
                 val world = Bukkit.getWorld(sender.world.name)
                 val location = Location(world, sender.location.x, sender.location.y, sender.location.z)
                 world?.strikeLightning(location)
-                sender.sendMessage(hallOfShameMessage)
+                sender.sendMessage(minimessage.deserialize("<red>You have been added to the Hall of Shame.</red>"))
                 sender.playSound(sender.location, Sound.ENTITY_WITHER_SPAWN, 2.0f, 0.15f)
                 Bukkit.getOnlinePlayers()
                     .filter { it != sender }
                     .forEach { player ->
-                    val locale = player.locale().toString()
-                    if (locale.startsWith("es") && plugin.spanish_enabled) {
-                        player.sendMessage(minimessage.deserialize("<gray>${sender.name} fue agregado a la <light_purple>lista de jugadores miserables</light_purple>."))
-                    }
-                    else{
                         player.sendMessage(minimessage.deserialize("<gray>${sender.name} has been added to the <light_purple>Hall of Shame</light_purple>."))
-                    }
                 }
             }, 100L)
 

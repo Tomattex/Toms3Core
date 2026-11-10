@@ -12,8 +12,6 @@ import org.bukkit.entity.Player
 class ToggleAnnouncements(private val plugin : Toms3Core) : TabExecutor {
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
         if (sender is Player){
-            val locale = sender.locale().toString()
-            val isSpanish = locale.startsWith("es")
             Bukkit.getScheduler().runTaskAsynchronously(plugin, Runnable {
                 val playerData = plugin.playerDataFile(sender.name) ?: return@Runnable
                 val config = YamlConfiguration.loadConfiguration(playerData)
@@ -29,18 +27,10 @@ class ToggleAnnouncements(private val plugin : Toms3Core) : TabExecutor {
                     val message: Component
                     if (toggle) {
                         plugin.haveAnnouncementsDisabled.add(sender.uniqueId)
-                        message = if (isSpanish && plugin.spanish_enabled) {
-                            plugin.minimessage.deserialize("${plugin.prefix} ${plugin.toggleannouncements_message_off_es}")
-                        } else {
-                            plugin.minimessage.deserialize("${plugin.prefix} ${plugin.toggleannouncements_message_off_en}")
-                        }
+                        message = plugin.minimessage.deserialize("${plugin.prefix} ${plugin.toggleannouncements_message_off}")
                     } else {
                         plugin.haveAnnouncementsDisabled.remove(sender.uniqueId)
-                        message = if (isSpanish && plugin.spanish_enabled) {
-                            plugin.minimessage.deserialize("${plugin.prefix} ${plugin.toggleannouncements_message_on_es}")
-                        } else {
-                            plugin.minimessage.deserialize("${plugin.prefix} ${plugin.toggleannouncements_message_on_en}")
-                        }
+                        message = plugin.minimessage.deserialize("${plugin.prefix} ${plugin.toggleannouncements_message_on}")
                     }
                     sender.sendMessage(message)
                 })

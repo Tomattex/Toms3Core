@@ -16,15 +16,8 @@ class PlayerNetherRoofListener(private val plugin: Toms3Core) : Listener {
     // also prevents players from being killed by the void damage thing on the nether roof
 
     private fun doChecks(to: Location, player: Player): Boolean {
-        val playerLocale = player.locale().toString()
-        val isSpanish = playerLocale.startsWith("es") && plugin.spanish_enabled
-
         if (to.y > 127 && plugin.block_nether_roof) {
-            if (isSpanish) {
-                player.sendMessage(plugin.minimessage.deserialize("<gold>${plugin.prefix} El techo del Nether está deshabilitado."))
-            } else {
-                player.sendMessage(plugin.minimessage.deserialize("<gold>${plugin.prefix} Nether Roof is currently disabled."))
-            }
+            player.sendMessage(plugin.minimessage.deserialize("<gold>${plugin.prefix} Nether Roof is currently disabled."))
             plugin.logToConsole("<yellow>${player.name} tried to access Nether Roof.")
             return true
         }
@@ -34,11 +27,7 @@ class PlayerNetherRoofListener(private val plugin: Toms3Core) : Listener {
             val isStrictEnabled = plugin.patch_vclip_exploit_mode == "STRICT"
 
             if (isElytraEnabled || isStrictEnabled) {
-                if (isSpanish) {
-                    player.sendMessage(plugin.minimessage.deserialize("<gold>${plugin.prefix} No se pueden usar las elytras debajo de la bedrock debido a un exploit."))
-                } else {
-                    player.sendMessage(plugin.minimessage.deserialize("<gold>${plugin.prefix} This travel exploit is currently disabled."))
-                }
+                player.sendMessage(plugin.minimessage.deserialize("<gold>${plugin.prefix} This travel exploit is currently disabled."))
                 plugin.logToConsole("<yellow>${player.name} tried to execute the VClip exploit.")
                 return true
             }

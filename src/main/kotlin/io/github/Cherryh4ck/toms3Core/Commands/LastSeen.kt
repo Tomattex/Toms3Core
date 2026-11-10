@@ -26,25 +26,9 @@ class LastSeen(private val plugin : Toms3Core) : TabExecutor {
 
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
         val targetUser : String
-        val userLocale : String
-        val isSpanish : Boolean
-
-        if (sender is Player){
-            userLocale = sender.locale().toString()
-            isSpanish = userLocale.startsWith("es")
-        }
-        else{
-            isSpanish = true
-        }
 
         if (args.isEmpty()){
-            val mensaje = if (isSpanish && plugin.spanish_enabled) {
-                minimessage.deserialize("${plugin.prefix} <red>No puedes usar este comando sin poner el nombre de un jugador.</red>")
-            }
-            else {
-                minimessage.deserialize("${plugin.prefix} <red>You cannot use this command without putting the name of a player.</red>")
-            }
-            sender.sendMessage(mensaje)
+            sender.sendMessage(minimessage.deserialize("${plugin.prefix} <red>You cannot use this command without putting the name of a player.</red>"))
             return true
         }
         else {
@@ -52,13 +36,7 @@ class LastSeen(private val plugin : Toms3Core) : TabExecutor {
         }
 
         if (!validateUsername(targetUser)) {
-            val mensaje = if (isSpanish && plugin.spanish_enabled) {
-                minimessage.deserialize("${plugin.prefix} <red>$targetUser no es un nombre de jugador válido.</red>")
-            }
-            else {
-                minimessage.deserialize("${plugin.prefix} <red>$targetUser is not a valid player name.</red>")
-            }
-            sender.sendMessage(mensaje)
+            sender.sendMessage(minimessage.deserialize("${plugin.prefix} <red>$targetUser is not a valid player name.</red>"))
             return true
         }
 
@@ -66,25 +44,11 @@ class LastSeen(private val plugin : Toms3Core) : TabExecutor {
             val playerDataCache = plugin.playerDataFile(targetUser) ?: return@Runnable
             val player = Bukkit.getPlayerExact(targetUser)
             if (!playerDataCache.exists()) {
-                val message = if (isSpanish && plugin.spanish_enabled){
-                    minimessage.deserialize("${plugin.prefix} <red>${targetUser} nunca entró al servidor o no está en el cache del servidor.</red>")
-                }
-                else{
-                    minimessage.deserialize("${plugin.prefix} <red>${targetUser} has never entered the server or is not in the server cache.</red>")
-                }
-
-                sender.sendMessage(message)
+                sender.sendMessage(minimessage.deserialize("${plugin.prefix} <red>${targetUser} has never entered the server or is not in the server cache.</red>"))
                 return@Runnable
             }
             else if (player != null && player.isConnected){
-                val message = if (isSpanish && plugin.spanish_enabled){
-                    minimessage.deserialize("${plugin.prefix} <red>No puedes usar este comando porque ${targetUser} está conectado.</red>")
-                }
-                else{
-                    minimessage.deserialize("${plugin.prefix} <red>You cannot use this command because ${targetUser} is connected.</red>")
-                }
-
-                sender.sendMessage(message)
+                sender.sendMessage(minimessage.deserialize("${plugin.prefix} <red>You cannot use this command because ${targetUser} is connected.</red>"))
                 return@Runnable
             }
             val config = YamlConfiguration.loadConfiguration(playerDataCache)
@@ -102,31 +66,13 @@ class LastSeen(private val plugin : Toms3Core) : TabExecutor {
                 plugin.logToConsole("<green>UUID file found: ${uuid.toString()}")
             }
             if (unixTime.toInt() != 0){
-                val format = if (isSpanish && plugin.spanish_enabled) {
-                    SimpleDateFormat("dd/MM/yyyy HH:mm")
-                } else {
-                    SimpleDateFormat("MM/dd/yyyy hh:mm a")
-                }
+                val format = SimpleDateFormat("MM/dd/yyyy hh:mm a")
                 val result = format.format(Date(unixTime))
 
-                val message = if (isSpanish && plugin.spanish_enabled){
-                    minimessage.deserialize("${plugin.prefix} <gold><bold>${username}</bold> fue visto por última vez el <bold>${result}</bold>.</gold>")
-                }
-                else{
-                    minimessage.deserialize("${plugin.prefix} <gold><bold>${username}</bold> was last seen on <bold>${result}</bold>.</gold>")
-                }
-
-                sender.sendMessage(message)
+                sender.sendMessage(minimessage.deserialize("${plugin.prefix} <gold><bold>${username}</bold> was last seen on <bold>${result}</bold>.</gold>"))
             }
             else{
-                val message = if (isSpanish && plugin.spanish_enabled){
-                    minimessage.deserialize("${plugin.prefix} <red>${targetUser} nunca entró al servidor o no está en el cache del servidor.</red>")
-                }
-                else{
-                    minimessage.deserialize("${plugin.prefix} <red>${targetUser} has never entered the server or is not in the server cache.</red>")
-                }
-
-                sender.sendMessage(message)
+                sender.sendMessage(minimessage.deserialize("${plugin.prefix} <red>${targetUser} has never entered the server or is not in the server cache.</red>"))
                 return@Runnable
             }
         })
