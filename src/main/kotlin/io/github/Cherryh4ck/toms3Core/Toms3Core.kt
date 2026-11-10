@@ -1,6 +1,7 @@
 package io.github.Cherryh4ck.toms3Core
 
 import io.github.Cherryh4ck.toms3Core.Commands.Dupe
+import io.github.Cherryh4ck.toms3Core.Commands.Info
 import io.github.Cherryh4ck.toms3Core.Commands.Joindate
 import io.github.Cherryh4ck.toms3Core.Commands.LastSeen
 import io.github.Cherryh4ck.toms3Core.Commands.Playtime
@@ -192,6 +193,7 @@ class Toms3Core : JavaPlugin() {
         val toggleableCommands = mapOf(
             "commands.dupe.enable" to ToggleableCommand("dupe", emptyList(), Dupe(this)),
             "commands.vote.enable" to ToggleableCommand("vote", emptyList(), Vote(this)),
+            "commands.info.enable" to ToggleableCommand("info", emptyList(), Info(this)),
             "commands.toggleannouncements.enable" to ToggleableCommand("toggleannouncements", listOf("toggleann"), ToggleAnnouncements(this))
         )
 
