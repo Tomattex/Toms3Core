@@ -58,6 +58,9 @@ class Toms3Core : JavaPlugin() {
     var vote_message_en = config.getString("commands.vote.message.en")
     var vote_message_es = config.getString("commands.vote.message.es")
 
+    var info_message_en = config.getString("commands.info.message.en")
+    var info_message_es = config.getString("commands.info.message.es")
+
     var toggleannouncements_message_on_en = config.getString("commands.toggleannouncements.message.on.en")
     var toggleannouncements_message_on_es = config.getString("commands.toggleannouncements.message.on.es")
     var toggleannouncements_message_off_en = config.getString("commands.toggleannouncements.message.off.en")
@@ -213,6 +216,8 @@ class Toms3Core : JavaPlugin() {
         dupe_webhook_message = config.getString("commands.dupe.discord-webhook-message")
         vote_message_en = config.getString("commands.vote.message.en")
         vote_message_es = config.getString("commands.vote.message.es")
+        info_message_en = config.getString("commands.info.message.en")
+        info_message_es = config.getString("commands.info.message.es")
         toggleannouncements_message_on_en = config.getString("commands.toggleannouncements.message.on.en")
         toggleannouncements_message_on_es = config.getString("commands.toggleannouncements.message.on.es")
         toggleannouncements_message_off_en = config.getString("commands.toggleannouncements.message.off.en")

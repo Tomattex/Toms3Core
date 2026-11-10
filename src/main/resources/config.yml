@@ -33,6 +33,11 @@ commands:
     message:
       en: "You can vote the server via: <b>url</b>"
       es: "Puedes votar por el servidor entrando a: <b>url</b>"
+  info:
+    enable: true
+    message:
+      en: "Info about the server"
+      es: "Información sobre el servidor"
   toggleannouncements:
     enable: true
     message:
