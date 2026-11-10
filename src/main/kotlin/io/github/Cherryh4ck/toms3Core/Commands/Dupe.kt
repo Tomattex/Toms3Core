@@ -15,7 +15,6 @@ import org.bukkit.potion.PotionEffect
 import org.bukkit.potion.PotionEffectType
 
 class Dupe(private val plugin : Toms3Core) : TabExecutor {
-    val minimessage = MiniMessage.miniMessage()
     val drunkness = PotionEffect(PotionEffectType.NAUSEA, 30 * 20, 0, false, true, true)
     val darkness = PotionEffect(PotionEffectType.DARKNESS, 60 * 20, 0, false, true, true)
     val poison = PotionEffect(PotionEffectType.POISON, 120 * 20, 2, false, true, true)
@@ -27,7 +26,7 @@ class Dupe(private val plugin : Toms3Core) : TabExecutor {
             val alreadyFallen = config.getBoolean("fallen-for-dupe")
 
             if (alreadyFallen) {
-                sender.sendMessage(minimessage.deserialize("${plugin.prefix} <red>Don't be an idiot, newfag.</red>"))
+                sender.sendMessage(plugin.minimessage.deserialize("${plugin.prefix} <red>Don't be an idiot, newfag.</red>"))
                 return true
             }
 
@@ -38,7 +37,7 @@ class Dupe(private val plugin : Toms3Core) : TabExecutor {
                 })
             }
 
-            sender.sendMessage(minimessage.deserialize("<gray>popbob has joined the server.</gray>"))
+            sender.sendMessage(plugin.minimessage.deserialize("<gray>popbob has joined the server.</gray>"))
             Bukkit.getScheduler().runTaskLater(plugin, Runnable {
                 sender.sendMessage("${sender.name} » popbob my coords are ${sender.x.toInt().toString()} ${sender.z.toInt().toString()} come get me please")
             }, 20L)
@@ -56,12 +55,12 @@ class Dupe(private val plugin : Toms3Core) : TabExecutor {
                 val world = Bukkit.getWorld(sender.world.name)
                 val location = Location(world, sender.location.x, sender.location.y, sender.location.z)
                 world?.strikeLightning(location)
-                sender.sendMessage(minimessage.deserialize("<red>You have been added to the Hall of Shame.</red>"))
+                sender.sendMessage(plugin.minimessage.deserialize("<red>You have been added to the Hall of Shame.</red>"))
                 sender.playSound(sender.location, Sound.ENTITY_WITHER_SPAWN, 2.0f, 0.15f)
                 Bukkit.getOnlinePlayers()
                     .filter { it != sender }
                     .forEach { player ->
-                        player.sendMessage(minimessage.deserialize("<gray>${sender.name} has been added to the <light_purple>Hall of Shame</light_purple>."))
+                        player.sendMessage(plugin.minimessage.deserialize("<gray>${sender.name} has been added to the <light_purple>Hall of Shame</light_purple>."))
                 }
             }, 100L)
 
