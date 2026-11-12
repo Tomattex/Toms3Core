@@ -1,5 +1,5 @@
 # Toms3Core
-### Anarchy core created for toms3.cc
+### Core created for toms3.cc
 <p align="center">
   <a href="https://modrinth.com/plugin/toms3core">
     <img src="https://img.shields.io/modrinth/v/toms3core?logo=modrinth&label=Modrinth&color=00AF5C">
@@ -33,7 +33,6 @@
 * Anti-illegals system (block use, block place, dispenser bypass and item frame protection)
 * NBT storages prevention (chests, barrels, furnaces, hoppers, shulkers and more holding items)
 * Tile entity per chunk limit system with logging system
-* English and spanish support (hardcoded)
 * Prevents players from entering the Nether Roof without killing them
 * Fixes the "vclip exploit", used to enter and travel under the bedrock in the Nether
 ___
@@ -51,6 +50,7 @@ ___
 * /vote
 * /dupe
 * /seed
+* /info
 ___
 
 ## Special Thanks
