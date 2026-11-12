@@ -2,7 +2,6 @@ package io.github.Cherryh4ck.toms3Core.Commands
 
 import io.github.Cherryh4ck.toms3Core.DiscordWebhook
 import io.github.Cherryh4ck.toms3Core.Toms3Core
-import net.kyori.adventure.text.minimessage.MiniMessage
 import org.bukkit.Bukkit
 import org.bukkit.Location
 import org.bukkit.Sound
