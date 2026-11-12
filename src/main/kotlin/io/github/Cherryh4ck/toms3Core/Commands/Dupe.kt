@@ -39,10 +39,10 @@ class Dupe(private val plugin : Toms3Core) : TabExecutor {
 
             sender.sendMessage(plugin.minimessage.deserialize("<gray>popbob has joined the server.</gray>"))
             Bukkit.getScheduler().runTaskLater(plugin, Runnable {
-                sender.sendMessage("${sender.name} » popbob my coords are ${sender.x.toInt().toString()} ${sender.z.toInt().toString()} come get me please")
+                sender.sendMessage("<${sender.name}> popbob my coords are ${sender.x.toInt().toString()} ${sender.z.toInt().toString()} come get me please")
             }, 20L)
             Bukkit.getScheduler().runTaskLater(plugin, Runnable {
-                sender.sendMessage("popbob » ur fucked, im coming")
+                sender.sendMessage("<popbob>  ur fucked, im coming")
                 val health = sender.health - 1.0
                 sender.damage(health)
                 sender.addPotionEffect(drunkness)
