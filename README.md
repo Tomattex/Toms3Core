@@ -1,4 +1,4 @@
-# Toms3Cor
+# Toms3Core
 ### Core created for toms3.cc
 <p align="center">
   <a href="https://modrinth.com/plugin/toms3core">
